@@ -328,12 +328,25 @@ def listar_sessoes():
             col_info, col_valor, col_acao = st.columns([3, 2, 1])
             
             # Coluna de Informações Principais
+            # ... (dentro da função listar_sessoes)
+            # Coluna de Informações Principais
             with col_info:
                 st.markdown(f"**📅 {data_exibicao}** | **👤 {row['paciente_nome']}**")
-                # Usa 'N/A' se o campo tipo_receita for None em registros antigos
+                
+                # --- NOVO TRATAMENTO MAIS SEGURO ---
+                # 1. tipo_receita: O "else" original já funciona bem aqui
                 tipo_receita_exibicao = row['tipo_receita'] if row['tipo_receita'] else "N/A (Antigo)"
-                qtd_sessoes_exibicao = int(row['qtd_sessoes']) if row['qtd_sessoes'] else 1
+                
+                # 2. qtd_sessoes: É o ponto que falha. Checamos se é None/NaN antes de converter para int.
+                if pd.notna(row['qtd_sessoes']) and row['qtd_sessoes'] is not None:
+                    # Se for um valor válido, converte para inteiro
+                    qtd_sessoes_exibicao = int(row['qtd_sessoes'])
+                else:
+                    # Se for nulo/NaN, exibe "N/A" (ou você pode colocar 1, se for o valor padrão para registros antigos)
+                    qtd_sessoes_exibicao = "N/A" # Ou 1, se for sua regra de negócio para antigos
+                
                 st.caption(f"Tipo: {tipo_receita_exibicao} | Qtd: {qtd_sessoes_exibicao}")
+# ...
             
             # Coluna de Valor/Receita
             with col_valor:
