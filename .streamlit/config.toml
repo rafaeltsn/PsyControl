@@ -1,0 +1,11 @@
+[theme]
+# A base deve ser "dark" para usar o fundo escuro que você está vendo
+base="dark" 
+primaryColor="#00A896"          # Ciano/Verde Água (Acentuações: Botões, Linhas de Foco)
+backgroundColor="#1F2937"       # Fundo Escuro Principal (similar ao que você tem)
+secondaryBackgroundColor="#2F3C4C" # Fundo dos blocos de conteúdo (Containers, Abas, Inputs)
+textColor="#F9FAFB"             # Texto Claro/Branco Suave (Garante legibilidade)
+font="sans serif"
+
+# OPCIONAL: Se o input ainda estiver com contraste baixo, o Streamlit pode estar
+# usando o primaryColor no texto do input. O ajuste acima já deve ser suficiente.
